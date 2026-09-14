@@ -92,7 +92,7 @@ start = ["./build/a.out"]
 [publish]
 author = "codingmc"
 source = ["src/main.c"]
-ignore_file = "build"
+ignore_file = ".gitignore"
 repository = "https://github.com/user/project"
 branch = "main"
 
