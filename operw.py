@@ -109,6 +109,8 @@ def run():
         subprocess.run(["git", "commit", "-m", "Initialize and Update"])
         subprocess.run(["git", "push", "-u", "origin", pc["branch"]])
 
+        print(f"Publish {pc["source"]} on {pc["repository"]} at branch {pc["branch"]}")
+
     elif name == "install":
         install = config.get("install")
         git_method = install.get("git_method", [])
