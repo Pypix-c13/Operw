@@ -89,7 +89,25 @@ def run():
         subprocess.run(start)
 
     elif name == "publish":
-        print("Under development!")
+        publish = config.get("publish")
+
+        pc = {
+            "author": str(publish.get("author", "Unknown")),
+            "source": publish.get("source", []),
+            "ignore_file": str(publish.get("ignore_file", ".gitignore")),
+            "repository": str(publish.get("repository", "")),
+            "branch": str(publish.get("branch", "main"))
+        }
+
+        if pc["ignore_file"] != ".gitignore":
+            print("'ignore_file' just support .gitignore")
+            if not Path(".gitignore").exists():
+                pc["ignore_file"] = ""
+
+        subprocess.run(["git", "remote", "add", "origin", pc["repository"]])
+        subprocess.run(["git", "add", *pc["source"]])
+        subprocess.run(["git", "commit", "-m", "Initialize and Update"])
+        subprocess.run(["git", "push", "-u", "origin", pc["branch"]])
 
     elif name == "install":
         install = config.get("install")
